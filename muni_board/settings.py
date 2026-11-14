@@ -48,7 +48,7 @@ def load_settings(env_path=None):
     token = os.environ.get("TRANSIT_511_TOKEN", "").strip()
     if not token:
         raise SettingsError(
-            "TRANSIT_511_TOKEN is missing. Copy .env.example to .env and add the token."
+            "TRANSIT_511_TOKEN is missing. Run python3 tools/setup.py or add the token to .env."
         )
 
     settings = load_board_config(os.environ.get)

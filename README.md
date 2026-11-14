@@ -44,11 +44,16 @@ Clone this repository and open a terminal in its folder. Use Python 3.11 or newe
 ```sh
 git clone https://github.com/psatyajeet/bus-arrival-board.git
 cd bus-arrival-board
-cp .env.example .env
+python3 tools/setup.py
 ```
 
-Open `.env` in a text editor. Enter your token, the two stop codes, and your
-route for each row. A route's public number is a starting point. The live
+The script asks for your token without showing it as you type, saves your two
+rows to the gitignored `.env` file, and offers to fetch both stops immediately.
+It asks before replacing an existing file.
+
+For manual setup, run `cp .env.example .env` if you don't already have an
+`.env`. Open the file and enter your token, the two stop codes, and your route
+for each row. A route's public number is a starting point. The live
 response's `LineRef` gives you the exact value. Keep your token in your
 local `.env` and later on the device.
 
