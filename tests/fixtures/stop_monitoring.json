@@ -1,0 +1,94 @@
+{
+  "Siri": {
+    "ServiceDelivery": {
+      "ResponseTimestamp": "2025-01-02T00:00:00Z",
+      "Status": "true",
+      "StopMonitoringDelivery": {
+        "Status": "true",
+        "MonitoredStopVisit": [
+          {
+            "RecordedAtTime": "2025-01-02T00:00:00Z",
+            "MonitoredVehicleJourney": {
+              "LineRef": "38",
+              "DirectionRef": "IB",
+              "DestinationName": "Central Station",
+              "FramedVehicleJourneyRef": {
+                "DataFrameRef": "2025-01-01",
+                "DatedVehicleJourneyRef": "trip-12"
+              },
+              "MonitoredCall": {
+                "ExpectedArrivalTime": "2025-01-02T00:12:00Z",
+                "ExpectedDepartureTime": "2025-01-02T00:13:00Z"
+              }
+            }
+          },
+          {
+            "RecordedAtTime": "2025-01-02T00:00:00Z",
+            "MonitoredVehicleJourney": {
+              "LineRef": "38",
+              "DirectionRef": "IB",
+              "DestinationName": "Library",
+              "FramedVehicleJourneyRef": {
+                "DataFrameRef": "2025-01-01",
+                "DatedVehicleJourneyRef": "trip-04"
+              },
+              "MonitoredCall": {
+                "ExpectedArrivalTime": "2025-01-02T00:04:00Z",
+                "ExpectedDepartureTime": "2025-01-02T00:07:00Z"
+              }
+            }
+          },
+          {
+            "RecordedAtTime": "2025-01-02T00:00:00Z",
+            "MonitoredVehicleJourney": {
+              "LineRef": "38",
+              "DirectionRef": "IB",
+              "DestinationName": "Library",
+              "FramedVehicleJourneyRef": {
+                "DataFrameRef": "2025-01-01",
+                "DatedVehicleJourneyRef": "trip-04"
+              },
+              "MonitoredCall": {
+                "ExpectedArrivalTime": "2025-01-02T00:04:00Z"
+              }
+            }
+          },
+          {
+            "RecordedAtTime": "2025-01-02T00:00:00Z",
+            "MonitoredVehicleJourney": {
+              "LineRef": "77",
+              "DirectionRef": "IB",
+              "DestinationName": "Market",
+              "MonitoredCall": {
+                "ExpectedArrivalTime": "2025-01-02T00:02:00Z"
+              }
+            }
+          },
+          {
+            "RecordedAtTime": "2025-01-02T00:00:00Z",
+            "MonitoredVehicleJourney": {
+              "LineRef": "38",
+              "DirectionRef": "IB",
+              "DestinationName": "Central Station",
+              "MonitoredCall": {
+                "ExpectedArrivalTime": "2025-01-01T23:55:00Z"
+              }
+            }
+          },
+          {
+            "RecordedAtTime": "2025-01-02T00:00:00Z",
+            "MonitoredVehicleJourney": {
+              "LineRef": "38",
+              "DirectionRef": "IB",
+              "DestinationName": "Central Station",
+              "MonitoredCall": {
+                "DepartureStatus": "cancelled",
+                "ExpectedArrivalTime": "2025-01-02T00:06:00Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
