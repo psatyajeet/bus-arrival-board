@@ -9,12 +9,14 @@ import tomllib
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from types import ModuleType, SimpleNamespace
 from unittest.mock import patch
 from urllib.parse import parse_qs, urlsplit
 
 from muni_board.api import parse_511_time
 from muni_board.cli import main
+from tools import setup
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "tests/fixtures/stop_monitoring.json"
@@ -42,6 +44,52 @@ class SetupTests(unittest.TestCase):
         self.assertEqual("test+token", query["api_key"])
         self.received.append((query["agency"], query["stopCode"]))
         return self.payload
+
+    def test_new_user_can_pick_routes_and_generate_device_settings(self):
+        from test_api import FakeResponse
+
+        def urlopen(request, timeout):
+            return FakeResponse(json.dumps(self.respond(request.full_url)).encode())
+
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "device").mkdir()
+            with (
+                patch.object(setup, "PROJECT_ROOT", root),
+                patch.dict(os.environ, {}, clear=True),
+                patch("muni_board.api.urlopen", side_effect=urlopen),
+                patch("tools.setup.time.time", return_value=NOW),
+                redirect_stdout(io.StringIO()) as output,
+            ):
+                with (
+                    patch("tools.setup.getpass", return_value="test+token"),
+                    patch(
+                        "builtins.input", side_effect=["AA", "A:100", "9", "1", "BB", "B:200", "2"]
+                    ),
+                ):
+                    self.assertEqual(0, setup.main([]))
+
+                with (
+                    patch("tools.setup.getpass", return_value='local "Wi-Fi" password'),
+                    patch("builtins.input", return_value="Home Wi-Fi"),
+                ):
+                    self.assertEqual(0, setup.main(["--board"]))
+
+                with patch("builtins.input", return_value="n"):
+                    self.assertEqual(0, setup.main([]))
+
+            config = tomllib.loads((root / "device/settings.toml").read_text(encoding="utf-8"))
+            self.assertEqual("38", config["BOARD_ROW1_ROUTE"])
+            self.assertEqual("77", config["BOARD_ROW2_ROUTE"])
+            self.assertEqual("B:200", config["BOARD_ROW2_STOP"])
+            self.assertEqual(150, config["BOARD_POLL_SECONDS"])
+            self.assertEqual("test+token", config["TRANSIT_511_TOKEN"])
+            self.assertEqual('local "Wi-Fi" password', config["CIRCUITPY_WIFI_PASSWORD"])
+            self.assertEqual([("AA", "A:100"), ("BB", "B:200")], self.received)
+            self.assertIn("4 min to Library", output.getvalue())
+            self.assertIn("2 min to Market", output.getvalue())
+            self.assertNotIn("test+token", output.getvalue())
+            self.assertNotIn('local "Wi-Fi" password', output.getvalue())
 
     def test_laptop_cli_uses_both_configured_agencies_stops_and_routes(self):
         from test_api import FakeResponse

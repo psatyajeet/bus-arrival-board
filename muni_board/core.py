@@ -70,6 +70,21 @@ def _is_cancelled(journey, call):
     return any("cancel" in _text(value).lower() for value in status_values)
 
 
+def route_choices(payload):
+    """Return the route IDs and destinations reported at a stop."""
+    routes = {}
+    for visit in monitored_visits(payload):
+        journey = visit.get("MonitoredVehicleJourney") or {}
+        route = _text(journey.get("LineRef"))
+        call = journey.get("MonitoredCall") or {}
+        if route and not _is_cancelled(journey, call):
+            destinations = routes.setdefault(route, set())
+            destination = _text(journey.get("DestinationName") or call.get("DestinationDisplay"))
+            if destination:
+                destinations.add(destination)
+    return {route: sorted(destinations) for route, destinations in sorted(routes.items())}
+
+
 def _selected_time(call):
     for key in (
         "ExpectedArrivalTime",
