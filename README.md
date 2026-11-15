@@ -3,9 +3,12 @@
 A Wi-Fi connected 64×32 LED display for two Bay Area transit stops or routes,
 powered by an Adafruit MatrixPortal M4 and the 511 SF Bay Stop Monitoring API.
 
-![Render of the LED matrix showing eastbound and westbound route 38 countdowns](docs/board-preview.png)
+![Photo of the N Judah LED arrival board on a wooden table with its power cord visible](docs/board-photo.jpg)
 
-Firmware layout rendered with sample arrivals. The first number in each row is
+The original board showing N Judah arrivals at the time of the photo.
+[Data provided by 511.org](https://511.org).
+
+The first number in each row is
 the next arrival in minutes and seconds. The second is the following arrival
 in whole minutes. `DUE` means less than a minute.
 
@@ -144,5 +147,4 @@ changing the interval. [511 API limits](https://511.org/open-data/transit)
 
 </details>
 
-[Data provided by 511.org](https://511.org).
-The preview uses the [Terminus bitmap font shipped with CircuitPython](https://github.com/adafruit/circuitpython/blob/10.2.1/tools/fonts/ter-u12n.bdf).
+The optional firmware preview uses the [Terminus bitmap font shipped with CircuitPython](https://github.com/adafruit/circuitpython/blob/10.2.1/tools/fonts/ter-u12n.bdf).
