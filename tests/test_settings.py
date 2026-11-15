@@ -15,7 +15,7 @@ class SettingsTests(unittest.TestCase):
             template = Path(".env.example").read_text(encoding="utf-8")
             env_file.write_text(
                 template.replace("TRANSIT_511_TOKEN=", "TRANSIT_511_TOKEN='local-token'")
-                .replace("BOARD_POLL_SECONDS=150", "BOARD_POLL_SECONDS=180")
+                .replace("BOARD_POLL_SECONDS=150", "BOARD_POLL_SECONDS=30")
                 .replace("BOARD_ROW1_STOP=", "BOARD_ROW1_STOP=90001")
                 .replace("BOARD_ROW2_STOP=", "BOARD_ROW2_STOP=stop:90002"),
                 encoding="utf-8",
@@ -24,18 +24,18 @@ class SettingsTests(unittest.TestCase):
                 settings = load_settings(env_file)
 
         self.assertEqual("local-token", settings["token"])
-        self.assertEqual(180, settings["poll_seconds"])
+        self.assertEqual(30, settings["poll_seconds"])
         self.assertEqual(["90001", "stop:90002"], [stop["stop_code"] for stop in settings["stops"]])
 
-    def test_rejects_rate_limit_unsafe_interval(self):
+    def test_rejects_interval_below_supported_minimum(self):
         with tempfile.TemporaryDirectory() as directory:
             env_file = Path(directory) / ".env"
             env_file.write_text(
-                "TRANSIT_511_TOKEN=local-token\nBOARD_POLL_SECONDS=75\n",
+                "TRANSIT_511_TOKEN=local-token\nBOARD_POLL_SECONDS=29\n",
                 encoding="utf-8",
             )
             with patch.dict(os.environ, {}, clear=True):
-                with self.assertRaisesRegex(SettingsError, "at least 150"):
+                with self.assertRaisesRegex(SettingsError, "at least 30"):
                     load_settings(env_file)
 
     def test_laptop_and_device_examples_use_the_same_board_settings(self):

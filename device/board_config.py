@@ -28,8 +28,8 @@ def load_board_config(getenv):
         poll_seconds = int(getenv("BOARD_POLL_SECONDS") or 150)
     except (TypeError, ValueError):
         raise SettingsError("BOARD_POLL_SECONDS must be an integer")
-    if poll_seconds < 150:
-        raise SettingsError("BOARD_POLL_SECONDS must be at least 150")
+    if poll_seconds < 30:
+        raise SettingsError("BOARD_POLL_SECONDS must be at least 30")
 
     rows = []
     for number in (1, 2):

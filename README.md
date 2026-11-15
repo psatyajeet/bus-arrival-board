@@ -95,6 +95,14 @@ is 60 per hour per token. End continuous laptop testing before running the
 board on the same token. Use separate tokens or slower polling for multiple
 displays. [511 API limits](https://511.org/open-data/transit)
 
+With an increased quota, you can opt into faster refreshes. A two-stop
+display at `BOARD_POLL_SECONDS = 30` uses about 240 requests per hour. For
+that interval, request 300 requests per hour to leave room for setup and
+other calls. Once 511 raises your token's quota, copy the latest
+`device/board_config.py` to `CIRCUITPY` and set the interval in the board's
+`settings.toml`. The laptop preview reads the same setting from `.env`.
+
+
 ## Set up the display
 
 1. With power disconnected, attach the M4 to the panel’s HUB75 input and
