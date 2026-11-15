@@ -3,7 +3,7 @@
 A Wi-Fi connected 64×32 LED display for two Bay Area transit stops or routes,
 powered by an Adafruit MatrixPortal M4 and the 511 SF Bay Stop Monitoring API.
 
-![Photo of the N Judah LED arrival board on a wooden table with its power cord visible](docs/board-photo.jpg)
+![Photo of the N Judah LED arrival board on a wooden table with its power cord visible](docs/board-photo-wide.jpg)
 
 The original board showing N Judah arrivals at the time of the photo.
 [Data provided by 511.org](https://511.org).
