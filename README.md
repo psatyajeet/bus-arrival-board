@@ -60,16 +60,24 @@ carries data, and a stand or mount. The kit includes the **MatrixPortal M4**,
 
 ## Set up the display
 
-1. With power disconnected, attach the M4 to the panel’s HUB75 input and
-   connect panel power as shown in [Adafruit’s assembly guide](https://learn.adafruit.com/adafruit-matrixportal-m4/prep-the-matrixportal).
-   Check the stock demo when the panel first powers on.
-2. Connect through a USB-C data cable. Double-press reset and copy the
-   [MatrixPortal M4 CircuitPython UF2](https://circuitpython.org/board/matrixportal_m4/)
-   onto `MATRIXBOOT`. The original build used CircuitPython 10.2.1.
-   The drive should reappear as `CIRCUITPY`.
+1. With power disconnected, plug the MatrixPortal M4 into the connector
+   marked `IN` on the back of the LED panel. Remove any protective tape from
+   the power screw posts. Attach red to `+5V` and black to `GND`, then plug
+   the power lead into the panel. Put the panel on a nonconductive surface
+   and power it with the kit’s 5 V supply. If the factory demo is still
+   installed, check that its colors reach the whole panel.
+   [Adafruit’s assembly photos](https://learn.adafruit.com/adafruit-matrixportal-m4/prep-the-matrixportal)
+2. Connect the M4 to your computer with a USB-C data cable. Double-tap the
+   board’s Reset button. Wait for a drive named `MATRIXBOOT`, then drag the
+   MatrixPortal M4 `.uf2` file onto it. After the board restarts, the drive
+   should be called `CIRCUITPY`. Look for that drive before copying any
+   project files. The original prototype ran on CircuitPython 10.2.1.
+   [MatrixPortal M4 download](https://circuitpython.org/board/matrixportal_m4/) ·
+   [Adafruit’s reset and install photos](https://learn.adafruit.com/adafruit-matrixportal-m4/install-circuitpython)
 3. Download Adafruit’s [CircuitPython library bundle](https://circuitpython.org/libraries)
-   matching your CircuitPython major version. Copy these files and folders from
-   the bundle’s `lib/` into `CIRCUITPY/lib/`:
+   matching the first number of your CircuitPython version. For CircuitPython
+   10.x, choose the 10.x bundle. Unzip it, create a `lib` folder on
+   `CIRCUITPY` if needed, and copy these items from the bundle’s `lib` folder:
 
    - `adafruit_bitmap_font/`
    - `adafruit_bus_device/`
@@ -90,13 +98,10 @@ carries data, and a stand or mount. The kit includes the **MatrixPortal M4**,
 6. Follow the [bench checklist](BUILD_CHECKLIST.md) to verify arrivals,
    Wi-Fi recovery, and standalone power before mounting it.
 
-If the screen says `SETUP`, the USB serial console names the missing or
-invalid setting. For `CONNECT` or `WIFI!`, check the 2.4 GHz network and
-[AirLift firmware instructions](https://learn.adafruit.com/adafruit-matrixportal-m4/updating-esp32-firmware).
-`API ERR` indicates a failed refresh. `STALE` marks aged cached data and
-`NO DATA` appears when the cache has expired or a row has yet to load.
-On macOS or Linux, `python3 tools/capture_serial.py --device YOUR_SERIAL_PORT`
-records USB logs in `var/serial.log`.
+If the drive never appears, the board stays on `CONNECT`, or the display
+keeps restarting, use the [troubleshooting checklist](BUILD_CHECKLIST.md#troubleshooting).
+The original prototype used AirLift 3.3.0 for its Wi-Fi chip. AirLift and
+CircuitPython are separate firmware updates.
 
 ## Get help from ChatGPT or Claude
 
