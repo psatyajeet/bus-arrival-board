@@ -1,4 +1,4 @@
-# Parts for the bus arrival board
+# Parts for Transit Glow
 
 | Part | Buy or bring |
 | --- | --- |

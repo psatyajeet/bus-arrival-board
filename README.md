@@ -1,4 +1,4 @@
-# Build a bus arrival board
+# Transit Glow
 
 A Wi-Fi connected 64×32 LED display for two Bay Area transit stops or routes,
 powered by an Adafruit MatrixPortal M4 and the 511 SF Bay Stop Monitoring API.
@@ -42,8 +42,8 @@ in whole minutes. `DUE` means less than a minute.
 Clone this repository and open a terminal in its folder. Use Python 3.11 or newer.
 
 ```sh
-git clone https://github.com/psatyajeet/bus-arrival-board.git
-cd bus-arrival-board
+git clone https://github.com/psatyajeet/transit-glow.git
+cd transit-glow
 python3 tools/setup.py
 ```
 
